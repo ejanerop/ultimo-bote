@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ultimo-bote-app": {
+      "hosting": {
+        "ultimo-bote": [
+          "ultimo-bote-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ultimo-bote-app"
+  }
+}
