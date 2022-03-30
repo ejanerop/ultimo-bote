@@ -23,8 +23,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { PlayersComponent } from './pages/players/players.component';
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, NavigationComponent],
+  declarations: [AppComponent, DashboardComponent, NavigationComponent, PlayersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
