@@ -1,0 +1,17 @@
+.players-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 3em;
+  gap: 3em;
+}
+
+mat-card {
+  min-width: 200px;
+  width: 200px;
+
+  mat-card-title {
+    margin-bottom: 15px;
+  }
+}

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import {
+  Firestore,
+  collection,
+  collectionSnapshots,
+} from '@angular/fire/firestore';
 
 interface Item {
   name: string;
@@ -16,8 +19,8 @@ export class PlayerService {
 
   getPlayers() {
     let data: any = collection(this.firestore, 'players');
-    let items = collectionData(data);
-    console.log(items);
-    return items as Observable<Item[]>;
+    let items = collectionSnapshots(data);
+
+    return items;
   }
 }

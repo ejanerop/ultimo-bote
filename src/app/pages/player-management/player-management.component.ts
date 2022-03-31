@@ -1,7 +1,10 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { map } from 'rxjs';
+import { PlayerDialogContent } from 'src/app/components/player-dialog/player-dialog.component';
 import { PlayerService } from 'src/app/services/player.service';
 
 export interface PeriodicElement {
@@ -31,15 +34,31 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PlayerManagementComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   players: any;
-  displayedColumns: string[] = ['position', 'name', 'nick'];
-  constructor(private playerService: PlayerService) {}
+  displayedColumns: string[] = ['position', 'name', 'nick', 'actions'];
+  constructor(private playerService: PlayerService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.players = this.playerService.getPlayers();
-    this.players.subscribe((data: any) => {
-      console.log(data);
-      this.dataSource = new MatTableDataSource(data);
+    this.playerService
+      .getPlayers()
+      .pipe(
+        map((items: any) => {
+          return items.map((item: any) => {
+            return { id: item.id, ...item.data() };
+          });
+        })
+      )
+      .subscribe((data: any) => {
+        this.dataSource = new MatTableDataSource(data);
+      });
+  }
+
+  edit(element: any) {
+    console.log(element);
+
+    const dialogRef = this.dialog.open(PlayerDialogContent, { data: element });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
     });
-    console.log(this.players);
   }
 }
