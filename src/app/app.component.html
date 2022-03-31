@@ -9,8 +9,8 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Jugadores</a>
-      <a mat-list-item href="#">Jugadores (Gestión)</a>
+      <a mat-list-item routerLink="/players">Jugadores</a>
+      <a mat-list-item routerLink="/player_management">Jugadores (Gestión)</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -24,7 +24,10 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>ÚltimoBote</span>
+      <a routerLink="/">
+        <span>ÚltimoBote</span>
+      </a>
+      <mat-icon (click)="login()" style="margin-left: auto">login</mat-icon>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -1,9 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection } from '@firebase/firestore';
 import { map, Observable, shareReplay } from 'rxjs';
-import { PlayerService } from './services/player.service';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +10,8 @@ import { PlayerService } from './services/player.service';
 })
 export class AppComponent {
   title = 'ultimo-bote';
+  user: any;
+  token: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -21,4 +21,33 @@ export class AppComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+  login() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      login_hint: 'alain@laleña.com',
+    });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        this.token = credential?.accessToken;
+        // The signed-in user info.
+        this.user = result.user;
+        console.log(this.user);
+        console.log(this.token);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
 }
