@@ -10,6 +10,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,6 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -24,8 +26,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PlayersComponent } from './pages/players/players.component';
+import { PlayerManagementComponent } from './pages/player-management/player-management.component';
+import { PlayerComponent } from './components/player/player.component';
+
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, NavigationComponent, PlayersComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    NavigationComponent,
+    PlayersComponent,
+    PlayerManagementComponent,
+    PlayerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,6 +48,7 @@ import { PlayersComponent } from './pages/players/players.component';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideMessaging(() => getMessaging()),
+    provideStorage(() => getStorage()),
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
@@ -45,6 +58,7 @@ import { PlayersComponent } from './pages/players/players.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
