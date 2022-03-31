@@ -7,25 +7,6 @@ import { map } from 'rxjs';
 import { PlayerDialogContent } from 'src/app/components/player-dialog/player-dialog.component';
 import { PlayerService } from 'src/app/services/player.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  nick: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', nick: 'asd' },
-  { position: 2, name: 'Helium', nick: 'as' },
-  { position: 3, name: 'Lithium', nick: 'asd' },
-  { position: 4, name: 'Beryllium', nick: 'ad' },
-  { position: 5, name: 'Boron', nick: 'asd' },
-  { position: 6, name: 'Carbon', nick: 'asd' },
-  { position: 7, name: 'Nitrogen', nick: 'asd' },
-  { position: 8, name: 'Oxygen', nick: 'asd' },
-  { position: 9, name: 'Fluorine', nick: 'asd' },
-  { position: 10, name: 'Neon', nick: 'asd' },
-];
-
 @Component({
   selector: 'app-player-management',
   templateUrl: './player-management.component.html',
@@ -53,12 +34,24 @@ export class PlayerManagementComponent implements OnInit {
   }
 
   edit(element: any) {
-    console.log(element);
-
     const dialogRef = this.dialog.open(PlayerDialogContent, { data: element });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result);
+    });
+  }
+
+  create() {
+    const dialogRef = this.dialog.open(PlayerDialogContent);
+
+    dialogRef.afterClosed().subscribe((form) => {
+      if (form) {
+        if (form.invalid) {
+          return;
+        }
+
+        console.log(form);
+      }
     });
   }
 }

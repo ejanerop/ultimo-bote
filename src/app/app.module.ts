@@ -28,6 +28,12 @@ import { MatListModule } from '@angular/material/list';
 import { PlayersComponent } from './pages/players/players.component';
 import { PlayerManagementComponent } from './pages/player-management/player-management.component';
 import { PlayerComponent } from './components/player/player.component';
+import { PlayerDialogContent } from './components/player-dialog/player-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +43,7 @@ import { PlayerComponent } from './components/player/player.component';
     PlayersComponent,
     PlayerManagementComponent,
     PlayerComponent,
+    PlayerDialogContent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +66,10 @@ import { PlayerComponent } from './components/player/player.component';
     MatSidenavModule,
     MatListModule,
     MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

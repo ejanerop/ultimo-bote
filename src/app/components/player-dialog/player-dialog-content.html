@@ -1,0 +1,36 @@
+<h1>{{data ? "Editar " : "Añadir "}} jugador</h1>
+<form [formGroup]="form">
+  <div class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input
+        matInput
+        placeholder="..."
+        [value]="data?.name"
+        formControlName="name"
+      />
+      <mat-icon matSuffix>person_outline</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nick</mat-label>
+      <input
+        matInput
+        placeholder="..."
+        [value]="data?.nick"
+        formControlName="nick"
+      />
+      <mat-icon matSuffix>person_outline</mat-icon>
+    </mat-form-field>
+  </div>
+</form>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="form"
+    cdkFocusInitial
+  >
+    Save
+  </button>
+</mat-dialog-actions>

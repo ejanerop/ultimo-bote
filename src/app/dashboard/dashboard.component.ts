@@ -17,7 +17,7 @@ interface Item {
 })
 export class DashboardComponent {
   /** Based on the screen size, switch from standard to one column per row */
-  items: Observable<Item[]>;
+  items: Item[] = [];
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -43,8 +43,9 @@ export class DashboardComponent {
     firestore: Firestore,
     private playerService: PlayerService
   ) {
-    let data: any = collection(firestore, 'players');
-    this.items = this.playerService.getPlayers();
-    console.log(this.items);
+    this.playerService.getPlayers().subscribe((items: any) => {
+      this.items = items;
+      console.log(this.items);
+    });
   }
 }

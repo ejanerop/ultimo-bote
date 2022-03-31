@@ -5,6 +5,11 @@
   align-items: center;
   padding: 3em;
 
+  .btn-new {
+    align-self: flex-end;
+    margin-bottom: 1em;
+  }
+
   table {
     width: 100%;
   }
