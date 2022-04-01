@@ -34,6 +34,6 @@ export class PlayerService {
   editPlayer(player: any) {
     let db: any = collection(this.firestore, 'players');
     const { id, ...data } = player;
-    return setDoc(doc(this.firestore, 'players', id), data);
+    return setDoc(doc(this.firestore, 'players', id), data, { merge: true });
   }
 }
