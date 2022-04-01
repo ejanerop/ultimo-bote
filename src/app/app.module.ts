@@ -34,6 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerDetailsComponent } from './components/player-details/player-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { WeatherForecastComponent } from './components/weather-forecast/weather-forecast.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +48,13 @@ import { PlayerDetailsComponent } from './components/player-details/player-detai
     PlayerComponent,
     PlayerDialogContent,
     PlayerDetailsComponent,
+    CapitalizePipe,
+    WeatherForecastComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

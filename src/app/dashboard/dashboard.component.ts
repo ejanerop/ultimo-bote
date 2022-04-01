@@ -1,10 +1,6 @@
-import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection } from '@firebase/firestore';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../services/player.service';
+import { WeatherService } from '../services/weather.service';
 
 interface Item {
   name: string;
@@ -15,37 +11,41 @@ interface Item {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   /** Based on the screen size, switch from standard to one column per row */
   items: Item[] = [];
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 },
-        ];
-      }
+  cards = [
+    { title: 'Equipo de la jornada', cols: 2, rows: 1 },
+    { title: 'Máximo goleador', cols: 1, rows: 1 },
+    { title: 'Lista de jornadas', cols: 1, rows: 2 },
+    { title: 'El Tiempo', cols: 1, rows: 1 },
+  ];
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 },
-      ];
-    })
-  );
+  weekend: any = [];
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    firestore: Firestore,
-    private playerService: PlayerService
-  ) {
-    this.playerService.getPlayers().subscribe((items: any) => {
-      this.items = items;
-      console.log(this.items);
+    private playerService: PlayerService,
+    private weatherService: WeatherService
+  ) {}
+
+  ngOnInit(): void {
+    this.weatherService.getForecast().subscribe((data: any) => {
+      let { daily } = data;
+      let weekend = daily
+        .map((item: any) => {
+          item.date = new Date(item.dt * 1000);
+          item.dayOfWeek = item.date.getDay();
+          return item;
+        })
+        .filter((item: any) => {
+          return item.dayOfWeek === 6 || item.dayOfWeek === 0;
+        });
+      this.weekend = weekend;
+      console.log(weekend);
     });
+  }
+
+  dayOfWeek(day: number) {
+    return this.weatherService.dayOfWeek(day);
   }
 }

@@ -1,0 +1,23 @@
+<mat-card class="dashboard-card">
+  <mat-card-title> El tiempo </mat-card-title>
+  <mat-card-content class="dashboard-card-content">
+    <div class="weather-container">
+      <div class="day" *ngFor="let day of weekend">
+        <h1>{{ dayOfWeek(day.dayOfWeek) }}, {{ day.date.getDate() }}</h1>
+        <img
+          [src]="
+            'http://openweathermap.org/img/wn/' +
+            day.weather[0].icon +
+            '@2x.png'
+          "
+          [alt]="day.weather[0].description"
+          srcset=""
+        />
+        <p>
+          {{ day.temp.day }} ° |
+          {{ day.weather[0].description | capitalize }}
+        </p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
