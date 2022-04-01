@@ -21,6 +21,21 @@
       />
       <mat-icon matSuffix>person_outline</mat-icon>
     </mat-form-field>
+    <ng-container *ngFor="let skill of skills">
+      <mat-label>{{skill.label}}</mat-label>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1"
+        step="1"
+        min="0"
+        max="100"
+        aria-label="units"
+        class="skill-slider"
+        [value]="form.value[skill.name]"
+        (change)="onSkillChange(skill.name,$event)"
+      ></mat-slider>
+    </ng-container>
   </div>
 </form>
 <mat-dialog-actions align="end">

@@ -1,12 +1,60 @@
-<mat-card>
+<mat-card (click)="details(player)">
   <mat-card-title>{{ player.name }}</mat-card-title>
   <img
     mat-card-image
     [src]="player.profile_url | async"
     alt="Photo of a Shiba Inu"
   />
-  <mat-card-content> </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>Detalles</button>
-  </mat-card-actions>
+  <mat-card-content>
+    <div class="skills">
+      <div class="skill-container">
+        <div class="skill-value">
+          <span>{{ player.pace }}</span>
+        </div>
+        <div class="skill-label">
+          <span>VEL</span>
+        </div>
+      </div>
+      <div class="skill-container right">
+        <div class="skill-value">
+          <span>{{ player.shooting }}</span>
+        </div>
+        <div class="skill-label">
+          <span>DISP</span>
+        </div>
+      </div>
+      <div class="skill-container">
+        <div class="skill-value">
+          <span>{{ player.passing }}</span>
+        </div>
+        <div class="skill-label">
+          <span>PAS</span>
+        </div>
+      </div>
+      <div class="skill-container right">
+        <div class="skill-value">
+          <span>{{ player.dribbling }}</span>
+        </div>
+        <div class="skill-label">
+          <span>REG</span>
+        </div>
+      </div>
+      <div class="skill-container">
+        <div class="skill-value">
+          <span>{{ player.defending }}</span>
+        </div>
+        <div class="skill-label">
+          <span>DEF</span>
+        </div>
+      </div>
+      <div class="skill-container right">
+        <div class="skill-value">
+          <span>{{ player.physique }}</span>
+        </div>
+        <div class="skill-label">
+          <span>FIS</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>

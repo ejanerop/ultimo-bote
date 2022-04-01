@@ -1,6 +1,13 @@
 mat-card {
   min-width: 200px;
   width: 200px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 20px;
+
+  &:hover {
+    transform: scale(1.06);
+    cursor: pointer;
+  }
 
   .mat-card-image {
     height: 150px;
@@ -9,5 +16,25 @@ mat-card {
   }
   mat-card-title {
     margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .skill-container {
+      width: 50%;
+      display: flex;
+      justify-content: flex-start;
+      font-size: 1.6em;
+      margin-bottom: 0.3em;
+
+      .skill-value {
+        font-weight: 700;
+        margin-right: 0.5em;
+      }
+    }
   }
 }

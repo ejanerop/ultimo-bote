@@ -32,8 +32,8 @@ import { PlayerDialogContent } from './components/player-dialog/player-dialog.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlayerDetailsComponent } from './components/player-details/player-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PlayerManagementComponent,
     PlayerComponent,
     PlayerDialogContent,
+    PlayerDetailsComponent,
   ],
   imports: [
     BrowserModule,
