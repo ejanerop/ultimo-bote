@@ -34,7 +34,7 @@ export class PlayersComponent implements OnInit {
         this.items = items.map((item: any) => {
           let reference: any;
           if (!item.profile_url) {
-            reference = ref(storage, 'eric (2).jpg');
+            reference = ref(storage, 'default-player.svg');
           } else {
             reference = ref(storage, item.profile_url);
           }

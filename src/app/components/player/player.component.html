@@ -1,5 +1,8 @@
 <mat-card (click)="details(player)">
-  <mat-card-title>{{ player.name }}</mat-card-title>
+  <mat-card-title>
+    <span>{{ overall() }}</span>
+    {{ player.name }}
+  </mat-card-title>
   <img
     mat-card-image
     [src]="player.profile_url | async"

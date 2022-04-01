@@ -18,4 +18,15 @@ export class PlayerComponent implements OnInit {
     console.log(player);
     this.dialog.open(PlayerDetailsComponent, { data: player });
   }
+
+  overall() {
+    let sum =
+      this.player.pace +
+      this.player.shooting +
+      this.player.passing +
+      this.player.dribbling +
+      this.player.physique +
+      this.player.defending;
+    return Math.round(sum / 6);
+  }
 }
