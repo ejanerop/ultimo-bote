@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Nueva fecha</h1>
+<form [formGroup]="form">
+  <div mat-dialog-content class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-label>Quien asistió?</mat-label>
+  </div>
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="form" cdkFocusInitial>Ok</button>
+  </div>
+</form>
