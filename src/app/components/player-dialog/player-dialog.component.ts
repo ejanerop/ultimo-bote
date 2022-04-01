@@ -14,6 +14,7 @@ export class PlayerDialogContent {
     public fb: FormBuilder
   ) {
     this.form = fb.group({
+      id: data?.id || '',
       name: [data?.name || '', Validators.required],
       nick: [data?.nick || ''],
     });
