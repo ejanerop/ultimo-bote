@@ -4,6 +4,19 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    projectId: 'ultimo-bote-app',
+    appId: '1:832357320209:web:c55d21a6ab9fc82abd53b0',
+    storageBucket: 'ultimo-bote-app.appspot.com',
+    apiKey: 'AIzaSyDC7D-zKMxXXu7VIcn_9vK3skE3nvmekDE',
+    authDomain: 'ultimo-bote-app.firebaseapp.com',
+    messagingSenderId: '832357320209',
+    measurementId: 'G-86PJZ8189S',
+  },
+  open_weather_key: 'f7846836535a66fef85badd3f1f27c77',
+  weather_url: 'https://api.openweathermap.org/data/2.5',
+  latitude: '22.99362028204843',
+  longitude: '-82.385912945401',
 };
 
 /*
