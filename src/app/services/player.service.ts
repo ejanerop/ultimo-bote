@@ -3,7 +3,9 @@ import {
   Firestore,
   collection,
   collectionSnapshots,
+  addDoc,
 } from '@angular/fire/firestore';
+import { doc, setDoc } from '@firebase/firestore';
 
 interface Item {
   name: string;
@@ -22,5 +24,16 @@ export class PlayerService {
     let items = collectionSnapshots(data);
 
     return items;
+  }
+
+  createPlayer(item: any) {
+    let data: any = collection(this.firestore, 'players');
+    return addDoc(data, item);
+  }
+
+  editPlayer(player: any) {
+    let db: any = collection(this.firestore, 'players');
+    const { id, ...data } = player;
+    return setDoc(doc(this.firestore, 'players', id), data);
   }
 }
