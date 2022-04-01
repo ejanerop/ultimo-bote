@@ -9,7 +9,7 @@ interface Item {
   id: string;
   name: string;
   nick: string;
-  profile_url: string;
+  profile_url: any;
 }
 
 @Component({
@@ -36,7 +36,16 @@ export class PlayersComponent implements OnInit {
         })
       )
       .subscribe((items: any) => {
-        this.items = items;
+        this.items = items.map((item: any) => {
+          let reference: any;
+          if (!item.profile_url) {
+            reference = ref(storage, 'eric (2).jpg');
+          } else {
+            reference = ref(storage, item.profile_url);
+          }
+          item.profile_url = getDownloadURL(reference);
+          return item;
+        });
         console.log(this.items);
       });
 
