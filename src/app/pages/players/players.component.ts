@@ -19,13 +19,8 @@ interface Item {
 })
 export class PlayersComponent implements OnInit {
   items: Item[] = [];
-  profileUrl: Promise<string | null>;
 
-  constructor(
-    firestore: Firestore,
-    private playerService: PlayerService,
-    private storage: Storage
-  ) {
+  constructor(private playerService: PlayerService, private storage: Storage) {
     this.playerService
       .getPlayers()
       .pipe(
@@ -48,9 +43,6 @@ export class PlayersComponent implements OnInit {
         });
         console.log(this.items);
       });
-
-    const reference = ref(storage, 'eric (2).jpg');
-    this.profileUrl = getDownloadURL(reference);
   }
 
   ngOnInit(): void {}

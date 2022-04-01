@@ -6,17 +6,3 @@
   padding: 3em;
   gap: 3em;
 }
-
-mat-card {
-  min-width: 200px;
-  width: 200px;
-
-  .mat-card-image {
-    height: 150px;
-    object-fit: cover;
-    object-position: center;
-  }
-  mat-card-title {
-    margin-bottom: 15px;
-  }
-}
