@@ -2,4 +2,30 @@
   <button mat-flat-button color="primary" class="btn-new" (click)="create()">
     Nueva jornada
   </button>
+
+  <table mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.dateTime.toLocaleDateString("es-ES") }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="assist">
+      <th mat-header-cell *matHeaderCellDef>Asistencia</th>
+      <td mat-cell *matCellDef="let item">{{ item.assistance.length }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="remove(item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>

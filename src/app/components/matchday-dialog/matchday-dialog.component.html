@@ -64,7 +64,11 @@
     </div>
   </div>
   <div mat-dialog-actions [align]="'end'">
-    <button mat-button type="button" (click)="onNoClick()">No Thanks</button>
-    <button mat-button type="submit" cdkFocusInitial>Ok</button>
+    <button mat-flat-button color="basic" type="button" (click)="onNoClick()">
+      Cancelar
+    </button>
+    <button mat-flat-button color="primary" type="submit" cdkFocusInitial>
+      Guardar
+    </button>
   </div>
 </form>
