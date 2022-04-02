@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { PlayerDialogContent } from 'src/app/components/player-dialog/player-dialog.component';
 import { PlayerService } from 'src/app/services/player.service';
 import Swal from 'sweetalert2';
@@ -76,6 +77,8 @@ export class PlayerManagementComponent implements OnInit {
       this.playerService
         .createPlayer(form.value)
         .then((res) => {
+          console.log(res);
+
           Toast.fire({
             icon: 'success',
             title: 'Added successfully',
@@ -87,6 +90,28 @@ export class PlayerManagementComponent implements OnInit {
             title: 'There was an error',
           });
         });
+    });
+  }
+
+  remove(element: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.playerService
+          .removePlayer(element)
+          .then((res) => {
+            Toast.fire({
+              icon: 'success',
+              title: 'Removed successfully',
+            });
+          })
+          .catch((err) => {
+            Toast.fire({
+              icon: 'error',
+              title: 'There was an error',
+            });
+          });
+      }
     });
   }
 }
