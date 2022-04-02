@@ -15,7 +15,6 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {}
 
   details(player: any) {
-    console.log(player);
     this.dialog.open(PlayerDetailsComponent, { data: player });
   }
 

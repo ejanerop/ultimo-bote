@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
           return item.dayOfWeek === 6 || item.dayOfWeek === 0;
         });
       this.weekend = weekend;
-      console.log(weekend);
     });
   }
 

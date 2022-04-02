@@ -80,10 +80,8 @@ export class PlayerManagementComponent implements OnInit {
             icon: 'success',
             title: 'Added successfully',
           });
-          console.log(res);
         })
         .catch((err) => {
-          console.log(err);
           Toast.fire({
             icon: 'error',
             title: 'There was an error',

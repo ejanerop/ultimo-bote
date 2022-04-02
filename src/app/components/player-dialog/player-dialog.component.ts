@@ -42,8 +42,6 @@ export class PlayerDialogContent {
   }
 
   onSkillChange(skill: string, $event: MatSliderChange) {
-    console.log($event);
     this.form.get(skill)?.setValue($event.value);
-    console.log(this.form);
   }
 }

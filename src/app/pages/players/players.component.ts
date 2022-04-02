@@ -41,7 +41,6 @@ export class PlayersComponent implements OnInit {
           item.profile_url = getDownloadURL(reference);
           return item;
         });
-        console.log(this.items);
       });
   }
 
