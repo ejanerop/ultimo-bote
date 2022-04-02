@@ -26,24 +26,24 @@ export class MatchdaysComponent implements OnInit {
   ngOnInit(): void {}
 
   create() {
-    const dialogRef = this.dialog.open(MatchdayDialogComponent);
+    const dialogRef = this.dialog.open(MatchdayDialogComponent, {
+      width: '600px',
+    });
 
     dialogRef.afterClosed().subscribe((form) => {
-      if (!form || form.invalid) {
+      if (!form) {
+        console.log('invalid');
         return;
       }
-
       this.matchdayService
-        .createMatchday(form.value)
+        .createMatchday(form)
         .then((res) => {
           Toast.fire({
             icon: 'success',
             title: 'Added successfully',
           });
-          console.log(res);
         })
         .catch((err) => {
-          console.log(err);
           Toast.fire({
             icon: 'error',
             title: 'There was an error',
