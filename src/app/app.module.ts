@@ -27,6 +27,7 @@ import { WeatherForecastComponent } from './components/weather-forecast/weather-
 import { MatchdaysComponent } from './pages/matchdays/matchdays.component';
 import { MatchdayDialogComponent } from './components/matchday-dialog/matchday-dialog.component';
 import { MaterialModule } from './material.module';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MaterialModule } from './material.module';
     WeatherForecastComponent,
     MatchdaysComponent,
     MatchdayDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

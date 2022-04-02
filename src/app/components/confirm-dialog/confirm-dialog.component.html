@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Estas seguro?</h1>
+
+<div mat-dialog-actions align="end">
+  <button mat-flat-button (click)="close()">No</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Si
+  </button>
+</div>
