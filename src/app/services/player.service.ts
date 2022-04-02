@@ -4,6 +4,7 @@ import {
   collection,
   collectionSnapshots,
   addDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { doc, setDoc } from '@firebase/firestore';
 
@@ -27,13 +28,18 @@ export class PlayerService {
   }
 
   createPlayer(item: any) {
-    let data: any = collection(this.firestore, 'players');
-    return addDoc(data, item);
+    let db: any = collection(this.firestore, 'players');
+    const { id, ...data } = item;
+
+    return addDoc(db, data);
   }
 
   editPlayer(player: any) {
-    let db: any = collection(this.firestore, 'players');
     const { id, ...data } = player;
     return setDoc(doc(this.firestore, 'players', id), data, { merge: true });
+  }
+
+  removePlayer(player: any) {
+    return deleteDoc(doc(this.firestore, 'players', player.id));
   }
 }

@@ -3,6 +3,7 @@ import {
   addDoc,
   collection,
   collectionSnapshots,
+  deleteDoc,
   doc,
   Firestore,
   setDoc,
@@ -52,8 +53,11 @@ export class MatchdayService {
   }
 
   editMatchday(matchday: any) {
-    let db: any = collection(this.firestore, 'matchdays');
     const { id, ...data } = matchday;
     return setDoc(doc(this.firestore, 'matchdays', id), data, { merge: true });
+  }
+
+  removeMatchday(matchday: any) {
+    return deleteDoc(doc(this.firestore, 'matchdays', matchday.id));
   }
 }
