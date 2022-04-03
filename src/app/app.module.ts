@@ -28,6 +28,7 @@ import { MatchdaysComponent } from './pages/matchdays/matchdays.component';
 import { MatchdayDialogComponent } from './components/matchday-dialog/matchday-dialog.component';
 import { MaterialModule } from './material.module';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { KeeperSelectComponent } from './pages/keeper-select/keeper-select.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatchdaysComponent,
     MatchdayDialogComponent,
     ConfirmDialogComponent,
+    KeeperSelectComponent,
   ],
   imports: [
     BrowserModule,

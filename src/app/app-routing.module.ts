@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { KeeperSelectComponent } from './pages/keeper-select/keeper-select.component';
 import { MatchdaysComponent } from './pages/matchdays/matchdays.component';
 import { PlayerManagementComponent } from './pages/player-management/player-management.component';
 import { PlayersComponent } from './pages/players/players.component';
@@ -9,6 +10,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'players', component: PlayersComponent },
   { path: 'player_management', component: PlayerManagementComponent },
+  { path: 'keeper_select', component: KeeperSelectComponent },
   { path: 'matchdays', component: MatchdaysComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

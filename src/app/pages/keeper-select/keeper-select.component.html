@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 *ngIf="!selected">Escoge tu equipo</h1>
+  <table
+    *ngIf="!selected"
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+  >
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>Select</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? select(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="select(row)"
+    ></tr>
+  </table>
+  <button
+    mat-fab
+    color="primary"
+    class="accept-btn"
+    aria-label="Accept button"
+    *ngIf="selection.selected.length === 4 && !selected"
+    (click)="setOrder()"
+  >
+    <mat-icon>check</mat-icon>
+  </button>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div class="team-container" *ngIf="selected">
+    <div class="player" *ngFor="let player of team; let i = index">
+      <app-player [player]="player"></app-player>
+      <div class="position">{{ i + 1 }}</div>
+    </div>
+  </div>
+</div>
