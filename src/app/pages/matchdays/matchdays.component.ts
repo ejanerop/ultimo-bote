@@ -77,6 +77,17 @@ export class MatchdaysComponent implements OnInit {
     });
   }
 
+  edit(matchday: any) {
+    const dialogRef = this.dialog.open(MatchdayDialogComponent, {
+      width: '600px',
+      data: matchday,
+    });
+
+    dialogRef.afterClosed().subscribe((form) => {
+      console.log(form);
+    });
+  }
+
   remove(element: any) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
