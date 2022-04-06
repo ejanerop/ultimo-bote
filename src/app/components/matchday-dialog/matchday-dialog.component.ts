@@ -19,7 +19,7 @@ const Toast = Swal.mixin({
   templateUrl: './matchday-dialog.component.html',
   styleUrls: ['./matchday-dialog.component.scss'],
 })
-export class MatchdayDialogComponent implements OnInit {
+export class MatchdayDialogComponent {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   players: any = [];
   loading: boolean = false;
@@ -32,8 +32,16 @@ export class MatchdayDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder
   ) {
-    this.form = fb.group({
-      date: [data?.date || new Date(), [Validators.required]],
+    console.log(data);
+
+    this.initForm();
+    this.loadPlayers();
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      id: this.data?.id || '',
+      date: [this.data?.dateTime || new Date(), [Validators.required]],
       assistance: this.fb.array(
         [],
         [Validators.required, Validators.minLength(5)]
@@ -41,6 +49,33 @@ export class MatchdayDialogComponent implements OnInit {
       goals: this.fb.array([]),
       assists: this.fb.array([]),
     });
+
+    if (this.data?.assistance) {
+      this.data.assistance.forEach((player: any) => {
+        this.assistance.push(this.fb.control(player));
+        this.goals.push(this.playerGroup('goals', player));
+        this.assists.push(this.playerGroup('assists', player));
+      });
+    }
+    if (this.data?.goals) {
+      this.data.goals.forEach((player: any) => {
+        this.goals.controls
+          .find((item: any) => item.value.player === player.player)
+          ?.get('goals')
+          ?.setValue(player.goals);
+      });
+      if (this.data?.assists) {
+        this.data.assists.forEach((player: any) => {
+          this.assists.controls
+            .find((item: any) => item.value.player === player.player)
+            ?.get('assists')
+            ?.setValue(player.assists);
+        });
+      }
+    }
+  }
+
+  loadPlayers() {
     this.loading = true;
     this.playerService
       .getPlayers()
@@ -58,7 +93,27 @@ export class MatchdayDialogComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  get goals() {
+    return this.form.get('goals') as FormArray;
+  }
+
+  get assistance() {
+    return this.form.get('assistance') as FormArray;
+  }
+
+  get assists() {
+    return this.form.get('assists') as FormArray;
+  }
+
+  playerGroup(control: string, player_id: string) {
+    return this.fb.group({
+      player: player_id,
+      [control]: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(10)],
+      ],
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -83,29 +138,13 @@ export class MatchdayDialogComponent implements OnInit {
   }
 
   onAssistanceChange(event: any) {
-    const assistance = this.form.get('assistance') as FormArray;
-    const goals = this.form.get('goals') as FormArray;
-    const assists = this.form.get('assists') as FormArray;
+    const assistance = this.assistance;
+    const goals = this.goals;
+    const assists = this.assists;
     if (event.checked) {
       assistance.push(this.fb.control(event.source.value));
-      goals.push(
-        this.fb.group({
-          player: event.source.value,
-          goals: [
-            0,
-            [Validators.required, Validators.min(0), Validators.max(10)],
-          ],
-        })
-      );
-      assists.push(
-        this.fb.group({
-          player: event.source.value,
-          assists: [
-            0,
-            [Validators.required, Validators.min(0), Validators.max(10)],
-          ],
-        })
-      );
+      goals.push(this.playerGroup('goals', event.source.value));
+      assists.push(this.playerGroup('assists', event.source.value));
     } else {
       assistance.removeAt(assistance.value.indexOf(event.source.value));
       goals.removeAt(
@@ -120,28 +159,36 @@ export class MatchdayDialogComponent implements OnInit {
   }
 
   disabled(player_id: string) {
-    const assistance = this.form.get('assistance') as FormArray;
-    return !assistance.value.includes(player_id);
+    return !this.assistance.value.includes(player_id);
   }
 
   goalControl(player_id: string): number {
-    const goals = this.form.get('goals') as FormArray;
-    return goals.controls.findIndex(
+    return this.goals.controls.findIndex(
       (item: any) => item.value.player === player_id
     );
   }
 
   onGoalChange(player_id: string, event: any) {
-    const goals = this.form.get('goals') as FormArray;
     const index = this.goalControl(player_id);
-    goals.controls[index].get('goals')?.setValue(event.target.value as number);
+    this.goals.controls[index]
+      .get('goals')
+      ?.setValue(event.target.value as number);
   }
 
   onAssistChange(player_id: string, event: any) {
-    const assists = this.form.get('assists') as FormArray;
     const index = this.goalControl(player_id);
-    assists.controls[index]
+    this.assists.controls[index]
       .get('assists')
       ?.setValue(event.target.value as number);
+  }
+
+  goalsOf(player_id: string) {
+    const index = this.goalControl(player_id);
+    return this.goals.controls[index]?.get('goals')?.value as number;
+  }
+
+  assistsOf(player_id: string) {
+    const index = this.goalControl(player_id);
+    return this.assists.controls[index]?.get('assists')?.value as number;
   }
 }

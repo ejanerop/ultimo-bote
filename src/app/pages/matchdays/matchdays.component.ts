@@ -84,7 +84,24 @@ export class MatchdaysComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((form) => {
-      console.log(form);
+      if (!form) {
+        console.log('invalid');
+        return;
+      }
+      this.matchdayService
+        .editMatchday(form)
+        .then((res) => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Added successfully',
+          });
+        })
+        .catch((err) => {
+          Toast.fire({
+            icon: 'error',
+            title: 'There was an error',
+          });
+        });
     });
   }
 
