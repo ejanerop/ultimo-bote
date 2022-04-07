@@ -141,19 +141,18 @@ export class MatchdayDialogComponent {
     const assistance = this.assistance;
     const goals = this.goals;
     const assists = this.assists;
+    const value = event.source.value;
     if (event.checked) {
-      assistance.push(this.fb.control(event.source.value));
-      goals.push(this.playerGroup('goals', event.source.value));
-      assists.push(this.playerGroup('assists', event.source.value));
+      assistance.push(this.fb.control(value));
+      goals.push(this.playerGroup('goals', value));
+      assists.push(this.playerGroup('assists', value));
     } else {
-      assistance.removeAt(assistance.value.indexOf(event.source.value));
+      assistance.removeAt(assistance.value.indexOf(value));
       goals.removeAt(
-        goals.value.findIndex((item: any) => item.player === event.source.value)
+        goals.value.findIndex((item: any) => item.player === value)
       );
       assists.removeAt(
-        assists.value.findIndex(
-          (item: any) => item.player === event.source.value
-        )
+        assists.value.findIndex((item: any) => item.player === value)
       );
     }
   }
