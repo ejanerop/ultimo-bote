@@ -5,8 +5,10 @@ import {
   collectionSnapshots,
   addDoc,
   deleteDoc,
+  getDocs,
 } from '@angular/fire/firestore';
-import { doc, setDoc } from '@firebase/firestore';
+import { doc, query, setDoc, where } from '@firebase/firestore';
+import { map } from 'rxjs';
 
 interface Item {
   name: string;
@@ -41,5 +43,22 @@ export class PlayerService {
 
   removePlayer(player: any) {
     return deleteDoc(doc(this.firestore, 'players', player.id));
+  }
+
+  getPlayerInfo(id: string) {
+    let records: any = collection(this.firestore, 'matchdays');
+
+    let q = query(records, where('assistance', 'array-contains', id));
+
+    return collectionSnapshots(q).pipe(
+      map((data: any) => {
+        return data.map((item: any) => {
+          return {
+            id: item.id,
+            ...item.data(),
+          };
+        });
+      })
+    );
   }
 }

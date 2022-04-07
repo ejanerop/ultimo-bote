@@ -1,1 +1,21 @@
-<canvas id="myChart" width="400" height="400"></canvas>
+<div class="details-container">
+  <div class="name">
+    {{ player.name }}
+    <span *ngIf="player.nick" class="nick">({{ player.nick }})</span>
+  </div>
+  <div class="info">
+    <div class="info-item">
+      <div class="title">Jornadas:</div>
+      <div class="value">{{ player.played }}</div>
+    </div>
+    <div class="info-item">
+      <div class="title">Goles:</div>
+      <div class="value">{{ player.goals }}</div>
+    </div>
+    <div class="info-item">
+      <div class="title">Asistencias:</div>
+      <div class="value">{{ player.assists }}</div>
+    </div>
+  </div>
+  <canvas id="myChart" width="400" height="400"></canvas>
+</div>

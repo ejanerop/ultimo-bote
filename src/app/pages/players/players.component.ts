@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { collection } from '@firebase/firestore';
 import { map, Observable } from 'rxjs';
 import { PlayerService } from 'src/app/services/player.service';
 import { getDownloadURL, ref, Storage } from '@angular/fire/storage';

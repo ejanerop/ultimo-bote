@@ -1,0 +1,37 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+
+  .name {
+    align-self: center;
+    font-size: 3em;
+    margin: 0 0 1em;
+
+    .nick {
+      font-size: 1.3rem;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 0 0 1em;
+
+    .info-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 0.5em;
+
+      .title {
+        font-size: 1.2rem;
+        margin-right: 0.5em;
+      }
+
+      .value {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
