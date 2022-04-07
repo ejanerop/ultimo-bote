@@ -30,24 +30,9 @@ export class MatchdaysComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.matchdayService
-      .getMatchdays()
-      .pipe(
-        map((items: any) => {
-          return items.map((item: any) => {
-            return {
-              id: item.id,
-              dateTime: new Date(item.data().date.seconds * 1000),
-              ...item.data(),
-            };
-          });
-        })
-      )
-      .subscribe((data: any) => {
-        console.log(data);
-
-        this.dataSource = new MatTableDataSource(data);
-      });
+    this.matchdayService.getMatchdays().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
 
   create() {
