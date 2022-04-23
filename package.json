@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "chart.js": "^3.7.1",
+    "firebaseui": "^6.0.1",
+    "firebaseui-angular": "^6.1.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.8",
     "tslib": "^2.3.0",
