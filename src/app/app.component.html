@@ -29,7 +29,12 @@
       <a routerLink="/">
         <span>ÚltimoBote</span>
       </a>
-      <mat-icon (click)="login()" style="margin-left: auto">login</mat-icon>
+      <mat-icon (click)="login()" style="margin-left: auto" *ngIf="!isAuth()">
+        login
+      </mat-icon>
+      <mat-icon (click)="logout()" style="margin-left: auto" *ngIf="isAuth()">
+        logout
+      </mat-icon>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -3,6 +3,14 @@
     Nueva jornada
   </button>
 
+  <mat-card class="calendar" *ngIf="!loading">
+    <mat-calendar
+      [dateClass]="dateFormat"
+      [dateFilter]="dateFilter"
+      (selectedChange)="onDateSelected($event)"
+    ></mat-calendar>
+  </mat-card>
+
   <table mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Fecha</th>

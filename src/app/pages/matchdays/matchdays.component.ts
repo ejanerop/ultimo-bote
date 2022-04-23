@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatCalendar } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
@@ -19,19 +20,58 @@ const Toast = Swal.mixin({
   selector: 'app-matchdays',
   templateUrl: './matchdays.component.html',
   styleUrls: ['./matchdays.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MatchdaysComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   players: any;
   displayedColumns: string[] = ['date', 'assist', 'actions'];
+  matchdays: Date[] = [];
+  loading: boolean = false;
+  @ViewChild(MatCalendar) calendar?: MatCalendar<Date>;
+
+  dateFormat: (date: Date) => any = (date: Date) => {
+    let selected = false;
+
+    if (this.matchdays) {
+      selected = this.matchdays.some(
+        (item: Date) =>
+          item.getFullYear() === date.getFullYear() &&
+          item.getDate() === date.getDate() &&
+          item.getMonth() === date.getMonth()
+      );
+    }
+
+    return selected ? 'highlight-matchday' : undefined;
+  };
+
+  dateFilter = (date: Date) => {
+    return this.matchdays.some((item: Date) => {
+      return (
+        item.getFullYear() === date.getFullYear() &&
+        item.getDate() === date.getDate() &&
+        item.getMonth() === date.getMonth()
+      );
+    });
+  };
+
   constructor(
     private matchdayService: MatchdayService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.matchdayService.getMatchdays().subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data);
+      if (data) {
+        this.matchdays = data.map((matchday: any) => {
+          console.log(matchday.dateTime instanceof Date);
+          return matchday.dateTime;
+        });
+        console.log(this.matchdays);
+      }
+      this.loading = false;
     });
   }
 
@@ -110,5 +150,9 @@ export class MatchdaysComponent implements OnInit {
           });
       }
     });
+  }
+
+  onDateSelected(event: any) {
+    console.log(event);
   }
 }

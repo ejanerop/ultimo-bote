@@ -10,7 +10,17 @@
     margin-bottom: 1em;
   }
 
+  .calendar {
+    width: 50%;
+    min-width: 300px;
+  }
+
   table {
     width: 100%;
   }
+}
+
+.highlight-matchday .mat-calendar-body-cell-content {
+  background: #69f0ae4d;
+  border-radius: 100%;
 }
