@@ -28,6 +28,7 @@ export class MatchdaysComponent implements OnInit {
   displayedColumns: string[] = ['date', 'assist', 'actions'];
   matchdays: Date[] = [];
   loading: boolean = false;
+  matches: any = [];
   @ViewChild(MatCalendar) calendar?: MatCalendar<Date>;
 
   dateFormat: (date: Date) => any = (date: Date) => {
@@ -63,6 +64,7 @@ export class MatchdaysComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.matchdayService.getMatchdays().subscribe((data: any) => {
+      this.matches = data;
       this.dataSource = new MatTableDataSource(data);
       if (data) {
         this.matchdays = data.map((matchday: any) => {
@@ -153,6 +155,12 @@ export class MatchdaysComponent implements OnInit {
   }
 
   onDateSelected(event: any) {
-    console.log(event);
+    let matchday = this.matches.find(
+      (matchday: any) =>
+        matchday.dateTime.getFullYear() === event.getFullYear() &&
+        matchday.dateTime.getDate() === event.getDate() &&
+        matchday.dateTime.getMonth() === event.getMonth()
+    );
+    console.log(matchday);
   }
 }
